@@ -6,25 +6,26 @@ public class Frazione {
 
     public static void main(String[] args)
     {
-        int j,k;
-        Frazione f1=new Frazione (5,10);
-        Frazione f2=new Frazione (5,10);
-        Frazione f3;
 
-        j=f1.getDenominatore();
-        System.out.println("Denominatore"+j);
-        j=f1.getNumeratore();
-        System.out.println("Numeratore"+j);
-        f3=f1.somma(f2);
-        System.out.println("f3"+f3);
-        f1.semplifica();
-        System.out.println("f1"+f1);
-        f3=f1.moltiplica(f2);
-        System.out.println("f3"+f3);
-        f3=f1.sottrai(f2);
-        System.out.println("f3"+f3);
-        f3=f1.dividi(f2);
-        System.out.println("f3"+f3);
+        if(args.length % 2 != 0 || args.length == 0) {
+            System.out.println("Utilizzo: java [nome file] [numeratore 1] [denominatore 1] [numeratore 2] [denominatore 2] ...");
+            System.exit(0);
+        }
+
+        int[] parametri = new int[args.length];
+        Frazione[] frazioni = new Frazione[args.length/2];
+
+        for(int i = 0, j=0; j<args.length; i+=1, j+=2) {
+            parametri[j] = Integer.parseInt(args[j]);
+            parametri[j+1] = Integer.parseInt(args[j+1]);
+            frazioni[i] = new Frazione(parametri[j], parametri[j+1]);
+        }
+
+        for(int i = 0; i<frazioni.length; i++) {
+            System.out.println("Frazione f" + (i) + " = " + frazioni[i]);
+        }
+
+        
     }
 
     public Frazione() {
@@ -35,21 +36,22 @@ public class Frazione {
     public Frazione(int numeratore, int denominatore) {
         this.numeratore = numeratore;
         this.denominatore = denominatore;
+        this.semplifica();
     }
-    
+    // Metodo per ottenere il numeratore
     public int getNumeratore() {
         return numeratore;
     }
-
+// Metodo per ottenere il denominatore
     public int getDenominatore() {
         return denominatore;
     }
-    
+    // Metodo per ottenere la rappresentazione testuale della frazione
     @Override
     public String toString() {
         return numeratore + "/" + denominatore;
     }
-    
+    // Metodo per sommare due frazioni
     public Frazione somma(Frazione altraFrazione) {
         int nuovoNumeratore = this.numeratore * altraFrazione.denominatore
                 + altraFrazione.numeratore * this.denominatore;
@@ -58,8 +60,8 @@ public class Frazione {
         return new Frazione(nuovoNumeratore, nuovoDenominatore);
     }
 
-   
-    private int calcolaMCD(int a, int b)
+    // Metodo per calcolare il Massimo Comune Divisore (MCD) con l'algoritmo di Euclide
+    private int calcolaMCD(int a, int b) 
     {
         int z, r;
         if (a<b) {
@@ -79,7 +81,7 @@ public class Frazione {
         return 0;
     }
 
-    
+    // Metodo per semplificare la frazione
     public void semplifica()
     {
         int mcd = calcolaMCD(this.numeratore, this.denominatore);
@@ -90,7 +92,7 @@ public class Frazione {
         }
     }
 
-    
+    // Metodo per moltipicare la frazione
     public Frazione moltiplica(Frazione altraFrazione)
     {
         int nuovoNumeratore = this.numeratore * altraFrazione.numeratore;
@@ -98,6 +100,7 @@ public class Frazione {
         return new Frazione(nuovoNumeratore, nuovoDenominatore);
     }
 
+    // Metodo per sottrarre due frazioni
     public Frazione sottrai(Frazione altraFrazione)
     {
         int nuovoNumeratore = this.numeratore * altraFrazione.denominatore - altraFrazione.numeratore * this.denominatore;
@@ -105,7 +108,7 @@ public class Frazione {
         return new Frazione(nuovoNumeratore, nuovoDenominatore);
     }
 
-    
+    // Metodo per dividere due frazioni
     public Frazione dividi(Frazione altraFrazione)
     {
         int nuovoNumeratore = this.numeratore * altraFrazione.denominatore;
