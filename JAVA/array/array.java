@@ -17,6 +17,7 @@ public static void somma1()throws NumberFormatException, IOException
     BufferedReader Tastiera = new BufferedReader(In);
     for (i=0; i<10; i++)
     {
+        System.out.printf("ciao");
     System.out.print("Valore: v["+i+"]= ");
     v[i]=Integer.parseInt(Tastiera.readLine());
     }
