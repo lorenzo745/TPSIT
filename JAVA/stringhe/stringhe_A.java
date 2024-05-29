@@ -27,7 +27,7 @@ public class stringhe_A
         int c = 0;
         for (int i = 0; i < stringa.length(); i++) 
         {
-            if (stringa.charAt(i) == 'a') // se trov il carattere 'a' lo conta
+            if (stringa.charAt(i) == 'a') // se trova il carattere 'a' lo conta
             {
                 c++; 
             }
